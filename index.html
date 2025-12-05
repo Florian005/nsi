@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formulaire NSI</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="topbar">Formulaire de retours sur le cours de NSI</div>
+        <form id="formulaire">
+            <input type="text" name="prenom" placeholder="Prénom" required><br><br>
+            <input type="text" name="nom" placeholder="Nom" required><br><br>
+            <input type="email" name="email" placeholder="Email"><br><br>
+
+            <label>Est-ce que vous pensez que c'est important de pouvoir boire en cours ?</label><br>
+            <input class="check" type="radio" name="boire_en_cours" value="oui"> Oui<br>
+            <input class="check" type="radio" name="boire_en_cours" value="non"> Non<br><br>
+
+            <textarea name="commentaires" placeholder="Vos retours..." rows="4"></textarea><br><br>
+        </form>
+
+        <button id="envoyer">Envoyer</button>
+
+    </body>
+</html>

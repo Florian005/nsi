@@ -24,15 +24,25 @@ const refreshBtn = document.getElementById('refreshResults');
 async function fetchResults() {
     resultsMessage.textContent = 'Chargement...';
     try {
-        const { data, error } = await supabase
+        // Premier essai : trier par `created_at` si la colonne existe
+        let data, error;
+        let res = await supabase
             .from('NSI_formulaire')
             .select('*')
             .order('created_at', { ascending: false })
             .limit(200);
 
-        if (error) throw error;
+        // Si la table n'a pas la colonne `created_at`, retenter sans tri
+        if (res.error && /created_at.*does not exist/i.test(res.error.message || '')) {
+            console.warn('created_at absent : retente la requête sans tri.', res.error.message);
+            res = await supabase
+                .from('NSI_formulaire')
+                .select('*')
+                .limit(200);
+        }
 
-        const rows = data || [];
+        if (res.error) throw res.error;
+        const rows = res.data || [];
         const total = rows.length;
 
         if (total === 0) {
@@ -90,7 +100,9 @@ async function fetchResults() {
 
     } catch (err) {
         console.error('Erreur en récupérant les résultats :', err);
-        resultsMessage.textContent = 'Erreur lors du chargement des résultats.';
+        // Affiche plus d'informations d'erreur dans l'interface pour aider au débogage
+        const message = err && (err.message || err.error || JSON.stringify(err)) || 'Erreur inconnue';
+        resultsMessage.textContent = 'Erreur lors du chargement des résultats : ' + message;
     }
 }
 

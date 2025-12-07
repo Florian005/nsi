@@ -1,7 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const supabaseUrl = 'https://hzrmxqqdkeyhfwxtcfwf.supabase.co';
-const supabaseKey = process.env.ANON_KEY;
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6cm14cXFka2V5aGZ3eHRjZndmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUwNTEyNjEsImV4cCI6MjA4MDYyNzI2MX0.OgSkI27XXexWxNUpxq33klPFSNOY7Gf1SPKnpeYs9WQ';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const form = document.getElementById('formulaire');
